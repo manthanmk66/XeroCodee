@@ -43,13 +43,13 @@ export class AppwriteService {
     }
   }
 
-  async login( { email, password }: LoginUserAccount) {
+  async login({ email, password }: LoginUserAccount) {
     try {
-         return await account.createEmailSession(email, password)
-    } catch (error:any) {
-      throw error
+      return await account.createSession(email, password);
+    } catch (error: any) {
+      throw error;
     }
- }
+  }
 
   async isLoggedIn(): Promise<boolean> {
     try {
