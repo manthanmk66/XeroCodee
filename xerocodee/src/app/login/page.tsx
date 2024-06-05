@@ -1,14 +1,22 @@
+"use client";
 import * as React from "react";
 import design from "../../assets/design.svg";
 import Link from "next/link";
+import useAuth from "@/context/useAuth";
+import { useRouter } from "next/navigation";
 
 interface ButtonProps {
   className: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ className, children }) => {
-  return <button className={className}>{children}</button>;
+const Button: React.FC<ButtonProps> = ({ className, children, onClick }) => {
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 interface InputProps {
@@ -54,6 +62,20 @@ const Image: React.FC<ImageProps> = ({ src, alt, className }) => {
 };
 
 const MyComponent: React.FC = () => {
+  const router = useRouter();
+  const { authStatus } = useAuth();
+
+  if (authStatus) {
+    router.replace("/profile");
+    return null;
+  }
+
+  const handleLogin = () => {
+    // Add any authentication logic here
+    // If login is successful, navigate to the landing page
+    router.push("/landingpage");
+  };
+
   return (
     <main className="flex flex-col justify-center bg-white">
       <section className="flex justify-center items-center px-16 py-20 w-full max-md:px-5 max-md:max-w-full">
@@ -84,7 +106,10 @@ const MyComponent: React.FC = () => {
                     className="px-8 py-5 mt-6 font-semibold capitalize whitespace-nowrap bg-white rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full"
                     placeholder="Enter your password"
                   />
-                  <Button className="justify-center items-center px-16 py-4 mt-6 text-base text-center text-white capitalize whitespace-nowrap bg-blue-600 rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full">
+                  <Button
+                    className="justify-center items-center px-16 py-4 mt-6 text-base text-center text-white capitalize whitespace-nowrap bg-blue-600 rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full"
+                    onClick={handleLogin}
+                  >
                     LOGIN
                   </Button>
                 </form>

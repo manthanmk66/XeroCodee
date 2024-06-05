@@ -1,4 +1,4 @@
-import conf from "../conf/config";
+import { conf } from "../conf/config";
 import { Client, Account, ID } from "appwrite";
 
 type CreateUserAccount = {
@@ -15,7 +15,10 @@ type LoginUserAccount = {
 
 const appwriteClient = new Client();
 
-appwriteClient.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId);
+appwriteClient
+  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setProject("6658bb3d000bbc2d82fe");
+console.log(conf.appwriteUrl);
 
 export const account = new Account(appwriteClient);
 
@@ -29,6 +32,7 @@ export class AppwriteService {
     try {
       const userAccount = await account.create(
         ID.unique(),
+
         email,
         password,
         `${firstname} ${lastname}`
@@ -80,4 +84,4 @@ export class AppwriteService {
 
 const appwriteService = new AppwriteService();
 
-export default appwriteService;
+export { appwriteService };

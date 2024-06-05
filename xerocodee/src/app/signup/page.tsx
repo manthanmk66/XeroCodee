@@ -1,9 +1,9 @@
 "use client";
-import appwriteService from "../../appwrite/config";
+import React, { FormEvent, useState } from "react";
+import { appwriteService } from "../../appwrite/config";
 import useAuth from "../../context/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
 import { Box, Typography, TextField, Button, Divider } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -12,14 +12,19 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     confirmPassword: "",
   });
-
   const [error, setError] = useState("");
+
   const router = useRouter();
-  const { setAuthStatus } = useAuth();
+  const { authStatus, setAuthStatus } = useAuth();
+
+  if (authStatus) {
+    router.replace("/profile");
+    return null;
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,8 +40,8 @@ const Signup = () => {
       const userData = await appwriteService.createUserAccount({
         email: formData.email,
         password: formData.password,
-        firstname: formData.firstName,
-        lastname: formData.lastName,
+        firstname: formData.firstname,
+        lastname: formData.lastname,
       });
       if (userData) {
         setAuthStatus(true);
@@ -55,7 +60,7 @@ const Signup = () => {
         justifyContent: "center",
         fontWeight: "fontWeightBold",
         background:
-          "linear-gradient(to top, #4192FF 0%, #4192FF 1%, #C6DEFF 82%, #C6DEFF 0%)", 
+          "linear-gradient(to top, #4192FF 0%, #4192FF 1%, #C6DEFF 82%, #C6DEFF 0%)",
         px: { xs: 2, md: 4 },
         py: 5,
         width: "100%",
@@ -150,8 +155,8 @@ const Signup = () => {
                 First Name
               </Typography>
               <TextField
-                name="firstName"
-                value={formData.firstName}
+                name="firstname"
+                value={formData.firstname}
                 onChange={handleChange}
                 variant="outlined"
                 sx={{
@@ -172,8 +177,8 @@ const Signup = () => {
                 Last Name
               </Typography>
               <TextField
-                name="lastName"
-                value={formData.lastName}
+                name="lastname"
+                value={formData.lastname}
                 onChange={handleChange}
                 variant="outlined"
                 sx={{
@@ -312,7 +317,6 @@ const Signup = () => {
                 variant="outlined"
                 sx={{
                   flex: 1,
-
                   py: 1,
                   fontFamily: "Nunito, Arial, sans-serif",
                 }}
