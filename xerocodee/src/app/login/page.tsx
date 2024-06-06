@@ -65,16 +65,14 @@ const MyComponent: React.FC = () => {
   const router = useRouter();
   const { authStatus } = useAuth();
 
+  const handleLogin = () => {
+    router.push("/landingpage");
+  };
+
   if (authStatus) {
     router.replace("/profile");
     return null;
   }
-
-  const handleLogin = () => {
-    // Add any authentication logic here
-    // If login is successful, navigate to the landing page
-    router.push("/landingpage");
-  };
 
   return (
     <main className="flex flex-col justify-center bg-white">
@@ -83,10 +81,10 @@ const MyComponent: React.FC = () => {
           <div className="flex gap-5 max-md:flex-col max-md:gap-0">
             <section className="flex flex-col w-[45%] max-md:ml-0 max-md:w-full">
               <header className="flex flex-col mt-6 text-sm font-bold leading-5 text-slate-950 text-opacity-50 max-md:mt-10 max-md:max-w-full">
-                <h1 className="text-3xl text-center text-black capitalize max-md:max-w-full">
+                <h1 className="text-3xl text-center text-black  max-md:max-w-full">
                   Welcome Arya Soni!
                 </h1>
-                <div className="flex gap-1 px-px mt-5 text-center capitalize max-md:flex-wrap">
+                <div className="flex gap-1 px-px mt-5 text-center  max-md:flex-wrap">
                   <div className="shrink-0 border border-solid border-slate-400 border-opacity-50 h-[13px] w-[148px]" />
                   <div className="flex-auto">Login to your Account</div>
                   <div className="shrink-0 border border-solid border-slate-400 border-opacity-50 h-[13px] w-[148px]" />
@@ -96,27 +94,27 @@ const MyComponent: React.FC = () => {
                     id="email"
                     name="Email-Id"
                     type="email"
-                    className="px-8 py-5 mt-32 font-semibold capitalize whitespace-nowrap bg-white rounded-md border border-solid shadow-sm border-stone-300 max-md:px-5 max-md:mt-10 max-md:max-w-full"
+                    className="px-8 py-5 mt-32 font-semibold  whitespace-nowrap bg-white rounded-md border border-solid shadow-sm border-stone-300 max-md:px-5 max-md:mt-10 max-md:max-w-full"
                     placeholder="Enter your email"
                   />
                   <Input
                     id="password"
                     name="Password"
                     type="password"
-                    className="px-8 py-5 mt-6 font-semibold capitalize whitespace-nowrap bg-white rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full"
+                    className="px-8 py-5 mt-6 font-semibold  whitespace-nowrap bg-white rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full"
                     placeholder="Enter your password"
                   />
                   <Button
-                    className="justify-center items-center px-16 py-4 mt-6 text-base text-center text-white capitalize whitespace-nowrap bg-blue-600 rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full"
+                    className="justify-center items-center px-16 py-4 mt-6 text-base text-center text-white  whitespace-nowrap bg-blue-600 rounded-md border border-solid border-stone-300 max-md:px-5 max-md:max-w-full"
                     onClick={handleLogin}
                   >
                     LOGIN
                   </Button>
                 </form>
-                <div className="self-center mt-7 font-extrabold text-center capitalize">
+                <div className="self-center mt-7 font-extrabold text-center ">
                   OR
                 </div>
-                <div className="flex gap-5 mt-7 font-semibold capitalize max-md:flex-wrap">
+                <div className="flex gap-5 mt-7 font-semibold  max-md:flex-wrap">
                   <div className="flex overflow-hidden relative flex-col flex-1 gap-5 px-3.5 py-2 border border-solid aspect-[4.56] border-stone-300 fill-white stroke-[1px] stroke-stone-300">
                     <Image
                       src="https://cdn.builder.io/api/v1/image/assets/TEMP/87021b23093b5211bf734d93c856e2c0a9f4cd080b9d15c99b99ec59b50d5022?apiKey=4f5e8168750948a38cec95fbef7182ac&"

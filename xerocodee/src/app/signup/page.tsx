@@ -45,7 +45,7 @@ const Signup = () => {
       });
       if (userData) {
         setAuthStatus(true);
-        router.push("/profile");
+        router.push("/signin");
       }
     } catch (error: any) {
       setError(error.message);
